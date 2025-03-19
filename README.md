@@ -52,6 +52,10 @@ python example.py
 
 4. Review the classification and testing requirements provided
 
+Snippet of the app:
+![image](https://github.com/user-attachments/assets/8b55326b-3d74-490b-8383-83227ae17667)
+
+
 ## Important Note
 
 This tool provides general guidance based on FDA regulations. Always consult with regulatory experts and refer to official FDA documentation for final decisions.

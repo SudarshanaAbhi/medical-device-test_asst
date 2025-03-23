@@ -11,8 +11,7 @@ app = Flask(__name__)
 
 # Initialize the OpenAI client
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
-    base_url="https://api.openai.com/v1"  # Explicitly set the base URL
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
 def generate_device_classification(device_name):
@@ -52,6 +51,17 @@ def generate():
     classification_info = generate_device_classification(device_name)
     return jsonify({'classification_info': classification_info})
 
+# API endpoint for direct HTTP requests
+@app.route('/api/classify/<device_name>', methods=['GET'])
+def classify_api(device_name):
+    if not device_name:
+        return jsonify({'error': 'Please provide a medical device name in the URL'}), 400
+    
+    classification_info = generate_device_classification(device_name)
+    return jsonify({
+        'device_name': device_name,
+        'classification_info': classification_info
+    })
+
 if __name__ == "__main__":
-    # For local development only
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000))) 
+    app.run(host='127.0.0.1', port=5000, debug=True) 
